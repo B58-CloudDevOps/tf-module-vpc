@@ -1,3 +1,10 @@
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
+
+  tags = merge(
+    local.tags,
+    {
+      Name = "${local.name_tag_prefix}-vpc"
+    }
+  )
 }
