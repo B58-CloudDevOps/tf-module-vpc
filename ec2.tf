@@ -3,6 +3,8 @@ resource "aws_instance" "web" {
   instance_type = "t3.micro"
 
   vpc_security_group_ids = [aws_security_group.allows_private.id]
+  subnet_id              = aws_subnet.app.*.id[0]
+
   tags = {
     Name = "HelloWorld"
   }
