@@ -38,6 +38,11 @@ resource "aws_route_table" "app" {
     vpc_peering_connection_id = aws_vpc_peering_connection.main.id
   }
 
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw.id
+  }
+
   tags = local.app_rt_tags
 }
 
@@ -56,6 +61,11 @@ resource "aws_route_table" "db" {
   route {
     cidr_block                = var.default_vpc_cidr
     vpc_peering_connection_id = aws_vpc_peering_connection.main.id
+  }
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw.id
   }
 
   tags = local.db_rt_tags
