@@ -5,3 +5,4 @@ variable "db_subnet_cidr" {}
 
 variable "env" {}
 variable "tags" {}
+variable "azs" {}
