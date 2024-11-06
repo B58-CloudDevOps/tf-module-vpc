@@ -17,6 +17,8 @@ resource "aws_route_table" "web" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
+
+  tags = local.web_rt_tags
 }
 
 # Creates web rt association to web subnets
@@ -35,6 +37,8 @@ resource "aws_route_table" "app" {
     cidr_block                = var.default_vpc_cidr
     vpc_peering_connection_id = aws_vpc_peering_connection.main.id
   }
+
+  tags = local.app_rt_tags
 }
 
 # Creates app rt association to app subnets
@@ -53,6 +57,8 @@ resource "aws_route_table" "db" {
     cidr_block                = var.default_vpc_cidr
     vpc_peering_connection_id = aws_vpc_peering_connection.main.id
   }
+
+  tags = local.db_rt_tags
 }
 
 # Creates db rt association to db subnets
