@@ -1,9 +1,9 @@
-moved {
-  from = aws_instance.web
-  to   = aws_instance.apache
-}
+# moved {
+#   from = aws_instance.web
+#   to   = aws_instance.apache
+# }
 
-resource "aws_instance" "apache" {
+resource "aws_instance" "web" {
   ami           = "ami-0fcc78c828f981df2"
   instance_type = "t3.micro"
 
