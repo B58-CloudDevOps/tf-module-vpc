@@ -15,9 +15,8 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.main.id
   subnet_id     = aws_subnet.web.*.id[0]
 
-  tags = {
-    Name = local.ngw_rt_tags
-  }
+  tags = local.ngw_rt_tags
+
 
   depends_on = [aws_internet_gateway.igw, aws_eip.main]
 }
