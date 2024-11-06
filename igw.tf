@@ -3,3 +3,4 @@ resource "aws_internet_gateway" "igw" {
 
   tags = local.igw_rt_tags
 
+}
