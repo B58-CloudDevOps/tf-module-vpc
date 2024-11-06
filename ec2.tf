@@ -10,8 +10,6 @@ resource "aws_instance" "web" {
   }
 }
 
-
-
 resource "aws_security_group" "allows_private" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic and all outbound traffic"
