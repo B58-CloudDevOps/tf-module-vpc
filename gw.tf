@@ -13,7 +13,7 @@ resource "aws_eip" "main" {
 # Nat gateway
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.main.id
-  subnet_id     = aws_subnet.web.*.id[0]
+  subnet_id     = aws_subnet.lb.*.id[0]
 
   tags = local.ngw_rt_tags
 

@@ -4,8 +4,8 @@ resource "aws_route" "default-vpc" {
   vpc_peering_connection_id = aws_vpc_peering_connection.main.id
 }
 
-# Creates web route table
-resource "aws_route_table" "web" {
+# Creates lb route table
+resource "aws_route_table" "lb" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -18,19 +18,19 @@ resource "aws_route_table" "web" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = local.web_rt_tags
+  tags = local.lb_rt_tags
 }
 
-# Creates web rt association to web subnets
+# Creates lb rt association to lb subnets
 
-resource "aws_route_table_association" "web" {
-  count = length(aws_subnet.web.*.id)
+resource "aws_route_table_association" "lb" {
+  count = length(aws_subnet.lb.*.id)
 
-  subnet_id      = aws_subnet.web.*.id[count.index]
-  route_table_id = aws_route_table.web.id
+  subnet_id      = aws_subnet.lb.*.id[count.index]
+  route_table_id = aws_route_table.lb.id
 }
 
-resource "aws_route_table" "app" {
+resource "aws_route_table" "eks" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -43,16 +43,16 @@ resource "aws_route_table" "app" {
     nat_gateway_id = aws_nat_gateway.ngw.id
   }
 
-  tags = local.app_rt_tags
+  tags = local.eks_rt_tags
 }
 
-# Creates app rt association to app subnets
+# Creates eks rt association to eks subnets
 
-resource "aws_route_table_association" "app" {
-  count = length(aws_subnet.app.*.id)
+resource "aws_route_table_association" "eks" {
+  count = length(aws_subnet.eks.*.id)
 
-  subnet_id      = aws_subnet.app.*.id[count.index]
-  route_table_id = aws_route_table.app.id
+  subnet_id      = aws_subnet.eks.*.id[count.index]
+  route_table_id = aws_route_table.eks.id
 }
 
 resource "aws_route_table" "db" {

@@ -1,19 +1,19 @@
-resource "aws_subnet" "web" {
-  count             = length(var.web_subnet_cidr)
+resource "aws_subnet" "lb" {
+  count             = length(var.lb_subnet_cidr)
   vpc_id            = aws_vpc.main.id
-  cidr_block        = var.web_subnet_cidr[count.index]
+  cidr_block        = var.lb_subnet_cidr[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = local.web_subnet_tags
+  tags = local.lb_subnet_tags
 }
 
-resource "aws_subnet" "app" {
-  count             = length(var.app_subnet_cidr)
+resource "aws_subnet" "eks" {
+  count             = length(var.eks_subnet_cidr)
   vpc_id            = aws_vpc.main.id
-  cidr_block        = var.app_subnet_cidr[count.index]
+  cidr_block        = var.eks_subnet_cidr[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = local.app_subnet_tags
+  tags = local.eks_subnet_tags
 }
 
 resource "aws_subnet" "db" {
