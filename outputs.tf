@@ -16,5 +16,5 @@ output "db_subnet_ids" {
 
 
 output "eks_subnet_cidr" {
-  value = aws_subnet.eks.*.cidr_blocks
+  value = aws_subnet.eks.*.cidr_block
 }
