@@ -13,3 +13,8 @@ output "eks_subnet_ids" {
 output "db_subnet_ids" {
   value = aws_subnet.db.*.id
 }
+
+
+output "eks_subnet_cidr" {
+  value = aws_subnet.eks.*.cidr_blocks
+}
